@@ -1,3 +1,28 @@
+/**
+ * Validates a credit card number and determines its card type based on predefined patterns.
+ *
+ * @param {string} cardNumber - The credit card number to validate.
+ * @returns {string} - The name of the card type if matched, or 'Unknown Card Type' if no match is found.
+ *
+ * @example
+ * // Returns 'Visa'
+ * validateCardNumber('4111111111111111');
+ *
+ * @example
+ * // Returns 'MasterCard'
+ * validateCardNumber('5555555555554444');
+ *
+ * @example
+ * // Returns 'Unknown Card Type'
+ * validateCardNumber('1234567890123456');
+ *
+ * @description
+ * This function uses regular expressions to match the provided card number against
+ * a list of known card type patterns, including Visa, MasterCard, American Express,
+ * Discover, and others. Each card type has a specific pattern that defines its valid
+ * number format. If the card number matches a pattern, the corresponding card type
+ * name is returned. Otherwise, 'Unknown Card Type' is returned.
+ */
 function validateCardNumber(cardNumber) {
     const cardPatterns = [
         { 
@@ -70,8 +95,15 @@ function validateCardNumber(cardNumber) {
     return 'Unknown Card Type';
 }
 
-document.getElementById('validate-button').addEventListener('click', function() {
-    const cardNumber = document.getElementById('card-number').value.trim();
+document.getElementById('validateButton').addEventListener('click', function() {
+    /**
+     * Retrieves the trimmed value of the input field with the ID 'cardNumber'.
+     * This value is expected to represent a credit card number entered by the user.
+     *
+     * @type {string} The trimmed credit card number input by the user.
+     */
+    let cardNumber = document.getElementById('cardNumber').value.trim();
+    cardNumber = cardNumber.replace(/\s+/g, ''); // Remove all spaces
     const cardFlag = validateCardNumber(cardNumber);
     alert(`Card Type: ${cardFlag}`);
 });
